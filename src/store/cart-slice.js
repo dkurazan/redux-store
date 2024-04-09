@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        items: []
+        items: [],
+        changed: false
     },
     reducers: {
         setCart: (state, action) => {
@@ -12,6 +13,7 @@ const cartSlice = createSlice({
         increase: (state, action) => {
             const passedItem = action.payload;
             const existingItem = state.items.find(item => item.id === passedItem.id);
+            state.changed = true;
 
             if (!existingItem) {
                 state.items.push({
@@ -28,6 +30,7 @@ const cartSlice = createSlice({
         decrease: (state, action) => {
             const passedItem = action.payload;
             const currentItemIndex = state.items.findIndex(item => item.id === passedItem.id);
+            state.changed = true;
 
             if (passedItem.quantity === 1) {
                 state.items.pop(currentItemIndex)

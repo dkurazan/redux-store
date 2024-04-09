@@ -34,7 +34,9 @@ export const fetchCartData = () => {
 
             const resData = await response.json();
 
-            dispatch(cartActions.setCart(resData));
+            dispatch(cartActions.setCart({
+                items: resData.items || []
+            }));
         } catch (error) {
             window.alert(error.message);
         }

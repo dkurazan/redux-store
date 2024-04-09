@@ -13,8 +13,8 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCartData())
-    }, [])
+        dispatch(fetchCartData());
+    }, [dispatch]);
 
     useEffect(() => {
         if (isInitial) {
@@ -22,7 +22,9 @@ function App() {
             return;
         }
 
-        dispatch(sendCartData(cart))
+        if (cart.changed) {
+            dispatch(sendCartData(cart));
+        }
     }, [cart, dispatch]);
 
     return (
