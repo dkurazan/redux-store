@@ -1,16 +1,29 @@
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart-slice";
+import { currencyFormatter } from "../../util/formatting";
 import classes from "./CartItem.module.css";
 
 const CartItem = ({ item }) => {
-    const { title, quantity, total, price } = item;
+    const dispatch = useDispatch();
+
+    const { title, quantity, price } = item;
+
+    const handleIncrease = () => {
+        dispatch(cartActions.increase(item));
+    };
+
+    const handleDecrease = () => {
+        dispatch(cartActions.decrease(item));
+    };
 
     return (
         <li className={classes.item}>
             <header>
                 <h3>{title}</h3>
                 <div className={classes.price}>
-                    ${total.toFixed(2)}{" "}
+                {currencyFormatter.format(price*quantity)}{" "}
                     <span className={classes.itemprice}>
-                        (${price.toFixed(2)}/item)
+                        ({currencyFormatter.format(price)}/item)
                     </span>
                 </div>
             </header>
@@ -19,8 +32,8 @@ const CartItem = ({ item }) => {
                     x <span>{quantity}</span>
                 </div>
                 <div className={classes.actions}>
-                    <button>-</button>
-                    <button>+</button>
+                    <button onClick={handleDecrease}>-</button>
+                    <button onClick={handleIncrease}>+</button>
                 </div>
             </div>
         </li>
