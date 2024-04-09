@@ -35,6 +35,29 @@ const cartSlice = createSlice({
     }
 })
 
+export const sendCartData = (cart) => {
+    return async () => {
+        try {
+            const response = await fetch(
+                "https://redux-store-6f779-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json",
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application.json",
+                    },
+                    body: JSON.stringify(cart),
+                }
+            );
+    
+            if (!response.ok) {
+                throw new Error("Sending cart data went wrong");
+            }
+        } catch (error) {
+            window.alert(error.message);
+        }
+    }
+}
+
 export const cartActions = cartSlice.actions;
 
 export default cartSlice.reducer
