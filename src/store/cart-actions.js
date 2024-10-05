@@ -26,13 +26,16 @@ export const sendCartData = (cart) => {
 export const fetchCartData = () => {
     return async (dispatch) => {
         try {
-            const response = await fetch("https://redux-store-6f779-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json");
+            const response = await fetch("https://redux-store-6f779-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json");            
 
             if (!response.ok) {
                 throw new Error("Fetching cart data went wrong");
             }
 
             const resData = await response.json();
+
+            console.log(resData);
+
 
             dispatch(cartActions.setCart({
                 items: resData.items || []
