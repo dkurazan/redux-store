@@ -5,7 +5,7 @@ This dummy project was bulit to practice my Redux toolkit and connecting to Fire
 # Live Demo
 
 Check out the live demo at
-[*](*)
+[https://redux-store-mocha-tau.vercel.app/](https://redux-store-mocha-tau.vercel.app/)
 
 ## Requirements
 
